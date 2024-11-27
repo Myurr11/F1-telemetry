@@ -1,6 +1,5 @@
 import os
 import pickle as pickle
-
 import fastf1 as ff1
 import numpy as np
 import pandas as pd
@@ -111,10 +110,6 @@ def get_telemetry_data(season, gp, session, cache_path=None, save_path=None, dow
 
     # Get all drivers
     drivers = pd.unique(laps['Driver'])
-
-    # Retrieve each driver's telemetry, resetting distance to 0 at start of each lap
-    # (based on https://medium.com/towards-formula-1-analysis/formula-1-data-analysis-tutorial-2021-russian-gp-to-box-
-    # or-not-to-box-da6399bd4a39)
     telemetry = pd.DataFrame()
     for driver in drivers:
         driver_laps = laps.pick_driver(driver)
@@ -147,18 +142,6 @@ def get_telemetry_data(season, gp, session, cache_path=None, save_path=None, dow
 
 
 def add_session_to_site_data(season, gp, session, path_to_data, cache_path=None, downsample=1):
-    """
-    Loads, processes, and stores the specified session's data in the file structure and format needed for the Dash app.
-    Overwrites any existing saved data for the specified session (but will not impact saved data for other sessions).
-    :param int season: Season
-    :param str gp: Name of the gp, e.g. 'Australian' or 'Bahrain'
-    :param str session: Session ('Race' or 'Qualifying')
-    :param path_to_data: Path to folder where data for the Dash app is stored. Should be a folder called "data" in the
-        same folder as app.py.
-    :param str cache_path: If caching FastF1 API call data (recommended), path to cache. None = do not use cache.
-    :param downsample: Factor by which to reduce the telemetry data (optional). E.g. if downsample = 2, every other
-        data point will be excluded from the saved file. Used if file size is a concern.
-    """
 
     # Create a folder for the year if it doesn't exist already
     path_to_year = os.path.join(path_to_data, str(season))

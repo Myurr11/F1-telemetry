@@ -87,17 +87,11 @@ def build_welcome_tab():
     return html.Div(
         dcc.Markdown(
             children="""
-                This site was developed to help fellow armchair analysts access Formula 1 data *regardless of their 
-                coding ability*. Using data made available by the [Fast F1](https://github.com/theOehrly/Fast-F1) Python
+                This site was developed using data made available by the [Fast F1](https://github.com/theOehrly/Fast-F1) Python
                 library ([MIT License](https://github.com/theOehrly/Fast-F1/blob/master/LICENSE) ), it provides users 
                 with interactive visualizations that allow them to explore a race in detail. **To get started, select a
                 year + GP at the top of  the page and click on the tab of interest.**
                 
-                If you want to tinker with the data in Python yourself, I found 
-                [the examples](https://theoehrly.github.io/Fast-F1/examples_gallery/index.html) from the Fast F1 
-                documentation to be helpful. 
-                 
-                Made with ❤   in Cambridge, MA.
                 """
         )
     )
@@ -219,13 +213,6 @@ def build_tel_tab(year, grand_prix):
     session = sessions[0]
     tel_param = TEL_PARAMS[0]
 
-    summary_text = '''
-        Use this visualization to compare the telemetry of various driver/session/lap combinations. 
-        Please note that this data should not be used for precise calculations as it is a mix of 
-        measured and interpolated values 
-        ([more info](https://theoehrly.github.io/Fast-F1/howto_accurate_calculations.html?highlight=interpolation)).
-        '''
-
     map_header = """
         To view a specific parameter on a map, select the parameter below. To see where a specific point on the map
         is on the graph above, click / tap the point on the map. This will create a vertical line on the graph above. 
@@ -233,7 +220,6 @@ def build_tel_tab(year, grand_prix):
     """
 
     content = [
-        dcc.Markdown(summary_text),
         html.Br(),
         dbc.Row(
             [
